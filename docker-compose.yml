@@ -20,7 +20,7 @@ services:
       DB_NAME: ${DB_NAME:-mymeals}
       DB_PASSWORD: ${DB_PASSWORD:-mymealspass}
       JWT_SECRET: ${JWT_SECRET:-change-me}
-      CLOUDINARY_URL: ${CLOUDINARY_URL}
+      CLOUDINARY_URL: ${CLOUDINARY_URL?err}
       ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-password}
 
@@ -30,7 +30,7 @@ services:
     depends_on:
       - backend
     environment:
-      CADDY_HOST: ${CADDY_HOST:-chat.local}
+      CADDY_HOST: ${CADDY_HOST?err}
     ports:
       - "80:80"
       - "443:443"

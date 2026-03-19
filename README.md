@@ -11,6 +11,8 @@ Full-stack restaurant dashboard with a Go backend and a React + Vite frontend.
 1. Ensure `MyMeals/.env` exists with required variables (see `MyMeals/README.md`).
 2. From the repo root, run:
 ```bash
+git submodule update --init --recursive
+
 docker compose up --build
 ```
 3. Backend API is at `http://localhost:8080`.

@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME:-mymeals}
+      POSTGRES_USER: ${DB_USER:-mymeals}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-mymealspass}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./MyMeals
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-mymeals}
+      DB_NAME: ${DB_NAME:-mymeals}
+      DB_PASSWORD: ${DB_PASSWORD:-mymealspass}
+      JWT_SECRET: ${JWT_SECRET:-change-me}
+      CLOUDINARY_URL: ${CLOUDINARY_URL}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-password}
+
+  frontend:
+    build:
+      context: ./Mymealsfe
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+      - "443:443"
+
+volumes:
+  db-data:

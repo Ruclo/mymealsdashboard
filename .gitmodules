@@ -1,0 +1,6 @@
+[submodule "MyMeals"]
+	path = MyMeals
+	url = ./MyMeals
+[submodule "Mymealsfe"]
+	path = Mymealsfe
+	url = ./Mymealsfe
